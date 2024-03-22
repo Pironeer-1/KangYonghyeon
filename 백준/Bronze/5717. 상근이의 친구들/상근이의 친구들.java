@@ -12,5 +12,6 @@ public class Main {
         System.out.println(friends);
       }
     }
+    input.close();//Sanner를 닫아야한다
   }
 }
