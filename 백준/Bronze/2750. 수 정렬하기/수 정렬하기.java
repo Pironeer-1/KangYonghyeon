@@ -1,21 +1,50 @@
 import java.util.Scanner;
 
 public class Main {
-  public static int [] insertion_sort(int[] arr){
-    //매개변수도 똑같이 타입 배열 변수명
-    for (int i=1; i<arr.length;i++){
-      int j;
-      int insertingData=arr[i];
-      for (j=i-1;j>=0;j--){
-        if(arr[j]>insertingData){
-          arr[j+1]=arr[j];
-        }else{
-          //삽입할 원소의 자리를 찾았어-> j+1이지
-          break;
-        }
+
+  public static int [] merge_sort(int[] arr,int left, int right){
+    //기저 조건 완전히 한개씩 분리 될때 까지
+    if (left<right){
+      int mid=(left+right)/2;
+      //왼쪽 정렬
+      merge_sort(arr, left, mid);
+      //오른쪽 정렬
+      merge_sort(arr, mid+1, right);
+      //두개의 정렬 합치기
+      merge(arr,left,mid,right);
+    }
+    return arr;
+  }
+  public static int [] merge(int [] arr, int left, int mid, int right){
+    //시작 인덱스
+    int leftArea= left;
+    int rightArea=mid+1;
+
+    //임시 배열
+    int [] tempArr=new int[right+1];
+    int tempArrIndex= left;
+    while (leftArea<=mid&&rightArea<=right) {
+      if (arr[leftArea]<=arr[rightArea]){
+        tempArr[tempArrIndex]=arr[leftArea];
+        leftArea++;
+      }else{
+        tempArr[tempArrIndex]=arr[rightArea];
+        rightArea++;
       }
-      arr[j+1]=insertingData;
-      //여기서 j를 다시 사용하기 위해서 for 문밖에서 선언
+      tempArrIndex++;
+  }
+  if(leftArea>mid){
+    for (int i=rightArea;i<=right ;i++){
+      tempArr[tempArrIndex++]=arr[i];
+    }
+  }else{
+    for(int i=leftArea;i<=mid;i++){
+      tempArr[tempArrIndex++]=arr[i];
+    }
+  }
+    //데이터 옯기기
+    for (int i=left; i<=right;i++){
+      arr[i]=tempArr[i];
     }
     return arr;
   }
@@ -28,13 +57,11 @@ public class Main {
       arr[i]=sc.nextInt();
     }
     //arr를 완성
-    //삽입 정렬
-    insertion_sort(arr);
+    merge_sort(arr, 0, arr.length-1);
 
-    //정렬 완료
+     //정렬 완료
     for (int i=0; i< arr.length; i++){
       System.out.println(arr[i]);
     }
-    sc.close();
   }
 }
