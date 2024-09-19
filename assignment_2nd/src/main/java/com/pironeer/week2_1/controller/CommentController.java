@@ -1,12 +1,11 @@
 package com.pironeer.week2_1.controller;
 
 import com.pironeer.week2_1.dto.request.CommentCreateRequest;
+import com.pironeer.week2_1.dto.response.CommentResponse;
+import com.pironeer.week2_1.repository.domain.Comment;
 import com.pironeer.week2_1.service.CommentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 //@operation 이랑 tag는 swagger문서 꾸밀때 사용
 //@schema도
@@ -24,6 +23,12 @@ public class CommentController {
         commentService.save(request);
         return ResponseEntity.ok().build();
     }
-
+    //댓글 단건조회..?필요 한가..?
+    @GetMapping("{commentId}")
+    public ResponseEntity<CommentResponse> read(@PathVariable ("commentId")Long id){
+        CommentResponse commentResponse=commentService.findById(id);
+        return ResponseEntity.ok().body(commentResponse);
+    }
+    //@pathVariable-> URL경로에서 변수를 가져오는데 사용 ex)comment/4 가 들어면 id에 4에 할당
 
 }

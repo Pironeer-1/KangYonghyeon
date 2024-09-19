@@ -1,6 +1,7 @@
 package com.pironeer.week2_1.service;
 
 import com.pironeer.week2_1.dto.request.CommentCreateRequest;
+import com.pironeer.week2_1.dto.response.CommentResponse;
 import com.pironeer.week2_1.repository.CommentRepository;
 import com.pironeer.week2_1.repository.domain.Comment;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,11 @@ public class CommentService {
         commentRepository.save(comment);
         System.out.println(comment);
 
+    }
+    //단건 조회
+    public CommentResponse findById(Long id) {
+        Comment comment=commentRepository.findById(id);
+        return CommentResponse.of(comment);
+        //여기서 새로 응답객체를 만들어서 넘김
     }
 }
