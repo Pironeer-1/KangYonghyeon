@@ -19,7 +19,15 @@ public class TopicService {
     private final TopicRepository topicRepository;
 
     public void save(TopicCreateRequest request) {
-        topicRepository.save(TopicMapper.from(request));
+        Topic topic=Topic.builder()
+                .title(request.title())
+                .content(request.content())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
+        //스트림 입력방식?? rq에서 가져와 입력을 해준다
+        topicRepository.save(topic);
+        //topicRepository.save(TopicMapper.from(request));
     }
 
     public TopicResponse findById(Long id) {

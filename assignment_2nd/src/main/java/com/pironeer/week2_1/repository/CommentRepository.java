@@ -4,6 +4,7 @@ import com.pironeer.week2_1.repository.domain.Comment;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -24,5 +25,8 @@ public class CommentRepository {
     public Comment findById(Long id) {
         return commentMap.get(id);
     }
-
+    //전체 조회
+    public List<Comment> findAll() {
+        return commentMap.values().stream().toList();
+    }
 }

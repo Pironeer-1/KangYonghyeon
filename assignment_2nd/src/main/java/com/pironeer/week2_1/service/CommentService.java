@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,5 +40,11 @@ public class CommentService {
         Comment comment=commentRepository.findById(id);
         return CommentResponse.of(comment);
         //여기서 새로 응답객체를 만들어서 넘김
+    }
+
+    public List<CommentResponse> findAll() {
+        List<Comment> comments=commentRepository.findAll();
+        return comments.stream().map(CommentResponse::of).toList();
+        //eomment들은 map해서 각각 CommentResponse의 of 메서드에 넣고 돌린다음에 리스트로 만든다.
     }
 }
