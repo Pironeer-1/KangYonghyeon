@@ -4,6 +4,7 @@ import com.pironeer.week2_1.repository.domain.Reply;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -16,5 +17,10 @@ public class ReplyRepository {
         long id = replyIdxGenerater.incrementAndGet();
         reply.setId(id);
         replyMap.put(id,reply);
+    }
+
+    //전체 조회
+    public List<Reply> findAll() {
+        return replyMap.values().stream().toList();
     }
 }
