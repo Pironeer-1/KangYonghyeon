@@ -56,4 +56,8 @@ public class ReplyService {
             reply.setContent(content);
         }
     }
+
+    public void deleteById(Long id) {
+        replyRepository.deleteById(id);
+    }
 }

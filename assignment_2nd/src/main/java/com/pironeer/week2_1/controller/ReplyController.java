@@ -36,8 +36,14 @@ public class ReplyController {
     }
     //업데이트
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody ReplyUpdateRequest request){
+    public ResponseEntity<ReplyResponse> update(@RequestBody ReplyUpdateRequest request){
         replyService.update(request);
+        return ResponseEntity.ok().build();
+    }
+    //삭제 구현
+    @DeleteMapping("/{replyId}")
+    public ResponseEntity<?> remove(@PathVariable("replyId") Long id){
+        replyService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }

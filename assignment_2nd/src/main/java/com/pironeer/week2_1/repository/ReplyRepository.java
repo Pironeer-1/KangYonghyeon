@@ -2,6 +2,7 @@ package com.pironeer.week2_1.repository;
 
 import com.pironeer.week2_1.repository.domain.Reply;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,5 +35,10 @@ public class ReplyRepository {
     public Optional<Reply> findById(Long id) {
         return Optional.of(replyMap.get(id));
         //optional 객체로 넘기기
+    }
+
+    public void deleteById(Long id) {
+        Assert.notNull(id,"ID MUST NOT BE NULL");
+        replyMap.remove(id);
     }
 }
