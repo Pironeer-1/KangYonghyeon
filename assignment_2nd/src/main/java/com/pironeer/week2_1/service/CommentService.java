@@ -36,7 +36,8 @@ public class CommentService {
     }
     //단건 조회
     public CommentResponse findById(Long id) {
-        Comment comment=commentRepository.findById(id);
+        Comment comment=commentRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Comment not found"));
         return CommentResponse.of(comment);
         //여기서 새로 응답객체를 만들어서 넘김
     }
