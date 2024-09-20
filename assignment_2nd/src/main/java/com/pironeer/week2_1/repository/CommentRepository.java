@@ -7,6 +7,7 @@ import org.springframework.util.Assert;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
@@ -30,8 +31,9 @@ public class CommentRepository {
     }
 
     //단건 조회
-    public Comment findById(Long id) {
-        return commentMap.get(id);
+    public Optional<Comment> findById(Long id) {
+        return Optional.of(commentMap.get(id));
+        //NullpointException을 해결하기 위해서 OPtional로 감싼다
     }
     //전체 조회
     public List<Comment> findAll() {

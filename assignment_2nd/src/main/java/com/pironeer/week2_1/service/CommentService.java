@@ -49,7 +49,9 @@ public class CommentService {
 
     //업데이트
     public CommentResponse update(CommentUpdateRequest request) {
-        Comment comment=commentRepository.findById(request.id());
+        Comment comment=commentRepository.findById(request.id())
+                .orElseThrow(()-> new RuntimeException("Comment not found"));
+        //optional값이 존재할시 값을 꺼내고 없을시 에러발생시 메세지를 던진다.
         //update dto을 하나더 만든다.
         //없으면 not found 예외처리 해주기
         //내용 업데이트
