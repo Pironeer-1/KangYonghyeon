@@ -29,7 +29,7 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
     //댓글 단건조회..?필요 한가..?
-    @GetMapping("{commentId}")
+    @GetMapping("/{commentId}")
     public ResponseEntity<CommentResponse> read(@PathVariable ("commentId")Long id){
         CommentResponse commentResponse=commentService.findById(id);
         return ResponseEntity.ok().body(commentResponse);
@@ -48,7 +48,7 @@ public class CommentController {
         return ResponseEntity.ok().body(response);
     }
     //삭제 구현
-    @DeleteMapping("{commentId}")
+    @DeleteMapping("/{commentId}")
     public ResponseEntity<?> remove(@PathVariable ("commentId")Long id){
         commentService.deleteById(id);
         return ResponseEntity.ok().build();

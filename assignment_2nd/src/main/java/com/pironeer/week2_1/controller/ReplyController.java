@@ -27,4 +27,10 @@ public class ReplyController {
         List<ReplyResponse> responses =replyService.findAll();
         return ResponseEntity.ok().body(responses);
     }
+    //단건 조회
+    @GetMapping("/{replyId}")
+    public ResponseEntity<ReplyResponse> read(@PathVariable ("replyId")Long id){
+        ReplyResponse replyResponse= replyService.findById(id);
+        return ResponseEntity.ok().body(replyResponse);
+    }
 }

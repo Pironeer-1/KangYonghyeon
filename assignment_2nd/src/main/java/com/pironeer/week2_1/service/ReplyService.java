@@ -32,4 +32,11 @@ public class ReplyService {
         return replies.stream().map(ReplyResponse::of).toList();
     }
 
+    //단건조회
+    public ReplyResponse findById(Long id) {
+        Reply reply =replyRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Reply not found"));
+        return ReplyResponse.of(reply);
+    }
+
 }
