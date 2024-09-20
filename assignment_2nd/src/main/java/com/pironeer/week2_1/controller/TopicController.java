@@ -18,6 +18,7 @@ import java.util.List;
 @Tag(name = "게시물(Topic)")
 @RequestMapping("/api/topic")
 public class TopicController {
+
     private final TopicService topicService;
 
     @PostMapping

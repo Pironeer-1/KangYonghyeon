@@ -4,7 +4,6 @@ import com.pironeer.week2_1.repository.domain.Topic;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
-//일단 topic으로 연결해보고 나중에 id로도 바꿔보기
 public record CommentCreateRequest(
         @NotBlank
         @Schema(description = "게시물")

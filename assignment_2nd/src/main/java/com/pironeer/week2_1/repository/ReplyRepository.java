@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ReplyRepository {
     private final AtomicLong replyIdxGenerater = new AtomicLong(1);
     private final Map<Long,Reply> replyMap=new HashMap<>();
-    //저장
+
     public void save(Reply reply) {
         if(reply.getId()==null){
             long id = replyIdxGenerater.incrementAndGet();
@@ -27,11 +27,10 @@ public class ReplyRepository {
 
     }
 
-    //전체 조회
     public List<Reply> findAll() {
         return replyMap.values().stream().toList();
     }
-    //단건 조회
+
     public Optional<Reply> findById(Long id) {
         return Optional.of(replyMap.get(id));
         //optional 객체로 넘기기

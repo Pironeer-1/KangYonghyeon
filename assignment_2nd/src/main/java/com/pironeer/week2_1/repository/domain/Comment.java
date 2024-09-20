@@ -11,7 +11,6 @@ public class Comment {
     private String content;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
-    //foreign key-> 일단 객체 자체로 하기
     private Topic topic;
 
     @Builder
