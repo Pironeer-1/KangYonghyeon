@@ -12,6 +12,7 @@ public class Reply {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Comment comment;
+
     @Builder
     public Reply(Long id, String content, LocalDateTime createTime, LocalDateTime updateTime, Comment comment) {
         this.id = id;
