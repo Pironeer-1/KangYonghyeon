@@ -16,9 +16,14 @@ public class CommentRepository {
     //일단 comment의 id를 고유로 만들고 객체 생성하면서 topic이랑 연결 하면될듯..?
     public void save(Comment comment) {
         //일단 예외 처리는 나중에
-        long id = commentIdxGenerator.getAndIncrement();
-        comment.setId(id);
-        commentMap.put(id, comment);
+        //수정 구현시 이미 존재하면 대체하기
+        if (comment.getId() == null) {
+            long id = commentIdxGenerator.getAndIncrement();
+            comment.setId(id);
+            commentMap.put(id, comment);
+        } else{
+            commentMap.replace(comment.getId(), comment);
+        }
     }
 
     //단건 조회
@@ -29,4 +34,7 @@ public class CommentRepository {
     public List<Comment> findAll() {
         return commentMap.values().stream().toList();
     }
+    //단건 업데이트
+
+
 }

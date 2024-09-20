@@ -1,6 +1,7 @@
 package com.pironeer.week2_1.controller;
 
 import com.pironeer.week2_1.dto.request.CommentCreateRequest;
+import com.pironeer.week2_1.dto.request.CommentUpdateRequest;
 import com.pironeer.week2_1.dto.response.CommentResponse;
 import com.pironeer.week2_1.repository.domain.Comment;
 import com.pironeer.week2_1.service.CommentService;
@@ -39,6 +40,12 @@ public class CommentController {
     public ResponseEntity<List<CommentResponse>> readAll(){
         List<CommentResponse> responses=commentService.findAll();
         return ResponseEntity.ok().body(responses);
+    }
+    //업데이트
+    @PutMapping
+    public ResponseEntity<CommentResponse> update(@RequestBody CommentUpdateRequest request){
+        CommentResponse response =commentService.update(request);
+        return ResponseEntity.ok().body(response);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.pironeer.week2_1.service;
 
 import com.pironeer.week2_1.dto.request.CommentCreateRequest;
+import com.pironeer.week2_1.dto.request.CommentUpdateRequest;
 import com.pironeer.week2_1.dto.response.CommentResponse;
 import com.pironeer.week2_1.repository.CommentRepository;
 import com.pironeer.week2_1.repository.domain.Comment;
@@ -32,8 +33,6 @@ public class CommentService {
                                 .build();
         //comment를만들고 레포에 저장
         commentRepository.save(comment);
-        System.out.println(comment);
-
     }
     //단건 조회
     public CommentResponse findById(Long id) {
@@ -46,5 +45,24 @@ public class CommentService {
         List<Comment> comments=commentRepository.findAll();
         return comments.stream().map(CommentResponse::of).toList();
         //eomment들은 map해서 각각 CommentResponse의 of 메서드에 넣고 돌린다음에 리스트로 만든다.
+    }
+
+    //업데이트
+    public CommentResponse update(CommentUpdateRequest request) {
+        Comment comment=commentRepository.findById(request.id());
+        //update dto을 하나더 만든다.
+        //없으면 not found 예외처리 해주기
+        //내용 업데이트
+        updateContent(request.content(),comment);
+        //시간 업데이트
+        comment.setUpdateAt(LocalDateTime.now());
+        commentRepository.save(comment);
+        return CommentResponse.of(comment);
+    }
+    //업데이트 함수
+    private static void updateContent(String content,Comment comment){
+        if(content!=null&& !content.isBlank()){
+            comment.setContent(content);
+        }
     }
 }
