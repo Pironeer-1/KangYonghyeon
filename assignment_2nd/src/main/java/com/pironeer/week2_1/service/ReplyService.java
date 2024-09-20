@@ -1,6 +1,7 @@
 package com.pironeer.week2_1.service;
 
 import com.pironeer.week2_1.dto.request.ReplyCreateRequest;
+import com.pironeer.week2_1.dto.request.ReplyUpdateRequest;
 import com.pironeer.week2_1.dto.response.ReplyResponse;
 import com.pironeer.week2_1.repository.ReplyRepository;
 import com.pironeer.week2_1.repository.domain.Reply;
@@ -39,4 +40,20 @@ public class ReplyService {
         return ReplyResponse.of(reply);
     }
 
+    public ReplyResponse update(ReplyUpdateRequest request) {
+        //업데이트할 대댓글 찾기
+        Reply reply=replyRepository.findById(request.id())
+                .orElseThrow(()-> new RuntimeException("Reply not found"));
+        //업데이트
+        updateContent(request.content(), reply);
+        //시간 업데이트
+        reply.setUpdateTime(LocalDateTime.now());
+        replyRepository.save(reply);
+        return ReplyResponse.of(reply);
+    }
+    private void updateContent(String content,Reply reply) {
+        if(content!=null&&!content.isBlank()) {
+            reply.setContent(content);
+        }
+    }
 }

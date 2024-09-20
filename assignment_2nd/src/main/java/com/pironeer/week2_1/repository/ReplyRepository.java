@@ -15,9 +15,15 @@ public class ReplyRepository {
     private final Map<Long,Reply> replyMap=new HashMap<>();
     //저장
     public void save(Reply reply) {
-        long id = replyIdxGenerater.incrementAndGet();
-        reply.setId(id);
-        replyMap.put(id,reply);
+        if(reply.getId()==null){
+            long id = replyIdxGenerater.incrementAndGet();
+            reply.setId(id);
+            replyMap.put(id,reply);
+        }
+        else {
+            replyMap.replace(reply.getId(),reply);
+        }
+
     }
 
     //전체 조회
