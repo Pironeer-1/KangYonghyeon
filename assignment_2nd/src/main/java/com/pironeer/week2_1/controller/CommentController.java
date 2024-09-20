@@ -47,5 +47,11 @@ public class CommentController {
         CommentResponse response =commentService.update(request);
         return ResponseEntity.ok().body(response);
     }
+    //삭제 구현
+    @DeleteMapping("{commentId}")
+    public ResponseEntity<?> remove(@PathVariable ("commentId")Long id){
+        commentService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

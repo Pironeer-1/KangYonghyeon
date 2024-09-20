@@ -2,6 +2,7 @@ package com.pironeer.week2_1.repository;
 
 import com.pironeer.week2_1.repository.domain.Comment;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,9 @@ public class CommentRepository {
             long id = commentIdxGenerator.getAndIncrement();
             comment.setId(id);
             commentMap.put(id, comment);
-        } else{
+        }
+        //단건 업데이트
+        else{
             commentMap.replace(comment.getId(), comment);
         }
     }
@@ -34,7 +37,13 @@ public class CommentRepository {
     public List<Comment> findAll() {
         return commentMap.values().stream().toList();
     }
-    //단건 업데이트
+    //삭제
+    public void deleteById(Long id) {
+        Assert.notNull(id, "ID MUST NOT BE NULL");
+        commentMap.remove(id);
+    }
+    //Assert.notNull(id, "ID MUST NOT BE NULL");는 Spring Framework에서 제공하는 유틸리티 메서드로, 주어진 객체가 null이 아닌지 검증할 때 사용됩니다
+    //Assert.notNul;(원하는 객체 ,null일시 예외 발생시 던질 메세지
 
 
 }

@@ -65,4 +65,8 @@ public class CommentService {
             comment.setContent(content);
         }
     }
+    //삭제 함수
+    public void deleteById(Long id) {
+        commentRepository.deleteById(id);
+    }
 }
