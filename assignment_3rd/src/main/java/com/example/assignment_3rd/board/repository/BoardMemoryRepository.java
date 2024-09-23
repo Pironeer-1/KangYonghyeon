@@ -41,7 +41,9 @@ public class BoardMemoryRepository implements BoardRepository {
     }
 
     @Override
-    public Long delete(Long id) {
-        return id;
+    public Long deleteById(Long boardId) {
+        Assert.notNull(boardId, "boardId must not be null");
+        boardMap.remove(boardId);
+        return boardId;
     }
 }

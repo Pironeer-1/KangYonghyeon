@@ -46,4 +46,11 @@ public class BoardService {
         BoardRes boardRes=BoardRes.of(board);
         return ResponseService.getSingeResult(boardRes);
     }
+
+    //단건 삭제
+    public SingleResult<Long> deleteById(Long boardId) {
+        Long deletedId=boardRepository.deleteById(boardId);
+        return ResponseService.getSingeResult(deletedId);
+    }
+
 }

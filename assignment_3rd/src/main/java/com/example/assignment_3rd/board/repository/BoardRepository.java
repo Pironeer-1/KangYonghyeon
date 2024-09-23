@@ -10,6 +10,5 @@ public interface BoardRepository {
     Optional<Board> findById(Long id);
     List<Board> findAll();
     Board update(Board board);
-    Long delete(Long id);
-
+    Long deleteById(Long boardId);
 }

@@ -44,5 +44,12 @@ public class BoardController {
         SingleResult<BoardRes> result=boardService.findById(boardId);
         return SuccessResponse.ok(result);
     }
+    //단건 삭제
+    @DeleteMapping("/{boardId}")
+    @Operation(summary = "게시물 삭제")
+    public SuccessResponse<SingleResult<Long>> delete(@PathVariable ("boardId")Long boardId){
+        SingleResult<Long> result=boardService.deleteById(boardId);
+        return SuccessResponse.ok(result);
+    }
 
 }
