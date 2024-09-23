@@ -2,7 +2,7 @@ package com.example.assignment_3rd.board.repository;
 
 import com.example.assignment_3rd.board.entity.Board;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +25,9 @@ public class BoardMemoryRepository implements BoardRepository {
     }
 
     @Override
-    public Optional<Board> findById(int id) {
-        return Optional.empty();
+    public Optional<Board> findById(Long id) {
+        Assert.notNull(id, "id must not be null");
+        return Optional.ofNullable(boardMap.get(id));
     }
 
     @Override

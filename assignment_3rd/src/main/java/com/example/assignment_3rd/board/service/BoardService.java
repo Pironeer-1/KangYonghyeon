@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +38,12 @@ public class BoardService {
         List<Board> boards=boardRepository.findAll();
         List<BoardRes> list=boards.stream().map(BoardRes::of).toList();
         return ResponseService.getListResult(list);
+    }
+
+    //단건 조회
+    public SingleResult<BoardRes> findById(Long boardId) {
+        Board board=boardRepository.findById(boardId).orElseThrow(()->new RuntimeException("Board not found"));
+        BoardRes boardRes=BoardRes.of(board);
+        return ResponseService.getSingeResult(boardRes);
     }
 }

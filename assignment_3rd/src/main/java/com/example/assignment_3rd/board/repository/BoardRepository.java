@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface BoardRepository {
     Board create(Board board);
-    Optional<Board> findById(int id);
+    Optional<Board> findById(Long id);
     List<Board> findAll();
     Board update(Board board);
     Long delete(Long id);

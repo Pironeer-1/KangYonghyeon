@@ -37,5 +37,12 @@ public class BoardController {
         ListResult<BoardRes> result=boardService.findAll();
         return SuccessResponse.ok(result);
     }
+    //id로 조회
+    @GetMapping("/{boardId}")
+    @Operation(summary = "게시물 단건 조회")
+    public SuccessResponse<SingleResult<BoardRes>> findById(@PathVariable ("boardId")Long boardId){
+        SingleResult<BoardRes> result=boardService.findById(boardId);
+        return SuccessResponse.ok(result);
+    }
 
 }
