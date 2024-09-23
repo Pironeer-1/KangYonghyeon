@@ -5,6 +5,7 @@ import com.example.assignment_3rd.board.dto.response.BoardRes;
 import com.example.assignment_3rd.board.entity.Board;
 import com.example.assignment_3rd.board.service.BoardService;
 import com.example.assignment_3rd.global.dto.response.SuccessResponse;
+import com.example.assignment_3rd.global.dto.result.ListResult;
 import com.example.assignment_3rd.global.dto.result.SingleResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,10 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +30,12 @@ public class BoardController {
         SingleResult<BoardRes> save = boardService.create(req);
         return SuccessResponse.ok(save);
     }
-    //전체
+    //전체 조회
+    @GetMapping
+    @Operation(summary = "게시물 전체 조회")
+    public SuccessResponse<ListResult<BoardRes>> findAll(){
+        ListResult<BoardRes> result=boardService.findAll();
+        return SuccessResponse.ok(result);
+    }
 
 }

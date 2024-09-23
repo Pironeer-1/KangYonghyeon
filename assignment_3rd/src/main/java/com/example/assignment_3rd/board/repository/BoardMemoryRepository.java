@@ -19,6 +19,7 @@ public class BoardMemoryRepository implements BoardRepository {
     @Override
     public Board create(Board board) {
         Long id = boaedIdx.incrementAndGet();
+        board.setId(id);
         boardMap.put(id,board);
         return board;
     }
@@ -30,7 +31,7 @@ public class BoardMemoryRepository implements BoardRepository {
 
     @Override
     public List<Board> findAll() {
-        return List.of();
+        return  boardMap.values().stream().toList();
     }
 
     @Override
