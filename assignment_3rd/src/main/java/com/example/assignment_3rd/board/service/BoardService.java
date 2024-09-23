@@ -1,12 +1,14 @@
 package com.example.assignment_3rd.board.service;
 
 import com.example.assignment_3rd.board.dto.request.BoardCreateReq;
+import com.example.assignment_3rd.board.dto.request.BoardUpdateReq;
 import com.example.assignment_3rd.board.dto.response.BoardRes;
 import com.example.assignment_3rd.board.entity.Board;
 import com.example.assignment_3rd.board.repository.BoardRepository;
 import com.example.assignment_3rd.global.dto.result.ListResult;
 import com.example.assignment_3rd.global.dto.result.SingleResult;
 import com.example.assignment_3rd.global.service.ResponseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +54,10 @@ public class BoardService {
         Long deletedId=boardRepository.deleteById(boardId);
         return ResponseService.getSingeResult(deletedId);
     }
-
+    //업데이트
+    public SingleResult<Long> update(BoardUpdateReq req) {
+        Board board=boardRepository.findById(req.id()).orElseThrow(()->new RuntimeException("Board not found"));
+        boardRepository.create(board.update(req));
+        return ResponseService.getSingeResult(board.getId());
+    }
 }

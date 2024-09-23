@@ -1,6 +1,7 @@
 package com.example.assignment_3rd.board.controller;
 
 import com.example.assignment_3rd.board.dto.request.BoardCreateReq;
+import com.example.assignment_3rd.board.dto.request.BoardUpdateReq;
 import com.example.assignment_3rd.board.dto.response.BoardRes;
 import com.example.assignment_3rd.board.entity.Board;
 import com.example.assignment_3rd.board.service.BoardService;
@@ -49,6 +50,13 @@ public class BoardController {
     @Operation(summary = "게시물 삭제")
     public SuccessResponse<SingleResult<Long>> delete(@PathVariable ("boardId")Long boardId){
         SingleResult<Long> result=boardService.deleteById(boardId);
+        return SuccessResponse.ok(result);
+    }
+    //update
+    @PutMapping
+    @Operation(summary = "게시물 업데이트")
+    public SuccessResponse<SingleResult<Long>> update(@Valid @RequestBody BoardUpdateReq req){
+        SingleResult<Long> result=boardService.update(req);
         return SuccessResponse.ok(result);
     }
 

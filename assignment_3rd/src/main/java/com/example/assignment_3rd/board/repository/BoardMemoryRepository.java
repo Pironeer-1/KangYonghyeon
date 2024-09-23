@@ -18,10 +18,17 @@ public class BoardMemoryRepository implements BoardRepository {
 
     @Override
     public Board create(Board board) {
-        Long id = boaedIdx.incrementAndGet();
-        board.setId(id);
-        boardMap.put(id,board);
-        return board;
+        if(boardMap.get(board.getId()) == null) {
+            Long id = boaedIdx.incrementAndGet();
+            board.setId(id);
+            boardMap.put(id,board);
+            return board;
+        }
+        else{
+            boardMap.replace(board.getId(),board);
+            return boardMap.get(board.getId());
+        }
+
     }
 
     @Override

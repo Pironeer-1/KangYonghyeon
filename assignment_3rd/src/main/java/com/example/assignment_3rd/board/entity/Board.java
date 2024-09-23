@@ -1,5 +1,6 @@
 package com.example.assignment_3rd.board.entity;
 
+import com.example.assignment_3rd.board.dto.request.BoardUpdateReq;
 import com.example.assignment_3rd.member.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,5 +26,12 @@ public class Board {
         this.author = author;
         this.createdAt = createdAt;
         this.updateAt = updateAt;
+    }
+    public Board update(BoardUpdateReq req) {
+        this.title=req.title();
+        this.content=req.content();
+        this.updateAt=LocalDateTime.now();
+        return this;
+
     }
 }
