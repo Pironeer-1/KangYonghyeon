@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Board {
-    private int id;
+    private Long id;
     private String title;
     private String content;
     private Member author;
@@ -18,8 +18,8 @@ public class Board {
     private LocalDateTime updateAt;
 
     @Builder
-    public Board(int id, String title, String content, Member author, LocalDateTime createdAt, LocalDateTime updateAt) {
-       this.id = id;
+    public Board(Long id, String title, String content, Member author, LocalDateTime createdAt, LocalDateTime updateAt) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;

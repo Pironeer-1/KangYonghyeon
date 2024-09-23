@@ -2,7 +2,9 @@ package com.example.assignment_3rd.global.dto.response;
 
 import com.example.assignment_3rd.global.dto.result.ResponseState;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
 
+@Getter
 public class SuccessResponse<T> {
 
     @Schema(description = "성공여부", example = "true")

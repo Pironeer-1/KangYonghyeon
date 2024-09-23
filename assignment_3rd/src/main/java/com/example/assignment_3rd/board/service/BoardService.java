@@ -1,6 +1,7 @@
 package com.example.assignment_3rd.board.service;
 
 import com.example.assignment_3rd.board.dto.request.BoardCreateReq;
+import com.example.assignment_3rd.board.dto.response.BoardRes;
 import com.example.assignment_3rd.board.entity.Board;
 import com.example.assignment_3rd.board.repository.BoardRepository;
 import com.example.assignment_3rd.global.dto.result.SingleResult;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public SingleResult<Board> create(BoardCreateReq req) {
+    public SingleResult<BoardRes> create(BoardCreateReq req) {
         Board reqBoard= Board.builder()
                 .title(req.title())
                 .content(req.content())
@@ -24,6 +25,8 @@ public class BoardService {
                 .updateAt(LocalDateTime.now())
                 .build();
         Board savedBoard=boardRepository.create(reqBoard);
-        return ResponseService.getSingeResult(savedBoard);
+        //res에 담아서
+        BoardRes boardRes=BoardRes.of(savedBoard);
+        return ResponseService.getSingeResult(boardRes);
     }
 }

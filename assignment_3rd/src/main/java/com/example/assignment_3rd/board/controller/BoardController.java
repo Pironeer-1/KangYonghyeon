@@ -1,11 +1,14 @@
 package com.example.assignment_3rd.board.controller;
 
 import com.example.assignment_3rd.board.dto.request.BoardCreateReq;
+import com.example.assignment_3rd.board.dto.response.BoardRes;
 import com.example.assignment_3rd.board.entity.Board;
 import com.example.assignment_3rd.board.service.BoardService;
 import com.example.assignment_3rd.global.dto.response.SuccessResponse;
 import com.example.assignment_3rd.global.dto.result.SingleResult;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +27,11 @@ public class BoardController {
 
     //게시글 생성
     @PostMapping
-    public SuccessResponse<SingleResult<Board>> create(@RequestBody BoardCreateReq req){
-        SingleResult<Board> save = boardService.create(req);
+    @Operation(summary = "게시물 작성")
+    public SuccessResponse<SingleResult<BoardRes>> create(@Valid @RequestBody BoardCreateReq req){
+        SingleResult<BoardRes> save = boardService.create(req);
         return SuccessResponse.ok(save);
     }
+    //전체
 
 }
