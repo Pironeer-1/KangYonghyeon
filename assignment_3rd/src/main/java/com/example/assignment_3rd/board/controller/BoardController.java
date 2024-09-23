@@ -25,8 +25,8 @@ public class BoardController {
     //게시글 생성
     @PostMapping
     public SuccessResponse<SingleResult<Board>> create(@RequestBody BoardCreateReq req){
-        boardService.create(req);
-        return ResponseEntity.ok().build();
+        SingleResult<Board> save = boardService.create(req);
+        return SuccessResponse.ok(save);
     }
 
 }

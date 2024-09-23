@@ -11,4 +11,5 @@ public interface BoardRepository {
     List<Board> findAll();
     Board update(Board board);
     Long delete(Long id);
+
 }

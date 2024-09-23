@@ -25,7 +25,7 @@ public class SuccessResponse<T> {
         return new SuccessResponse<>(code,message,data);
     }
     //주로 사용할 응답 객체 만들기
-    public static <T> SuccessResponse<T> ok(int code, String message, T data) {
+    public static <T> SuccessResponse<T> ok(T data) {
         return of(ResponseState.SUCCESS.getCode(),ResponseState.SUCCESS.getMsg(),data);
     }
 

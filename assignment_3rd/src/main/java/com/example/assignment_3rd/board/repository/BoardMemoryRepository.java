@@ -13,12 +13,14 @@ import java.util.concurrent.atomic.AtomicLong;
 @Repository
 public class BoardMemoryRepository implements BoardRepository {
 
-    private AtomicLong boaerIdx = new AtomicLong(0);
+    private AtomicLong boaedIdx = new AtomicLong(0);
     private Map<Long,Board> boardMap = new HashMap<>();
 
     @Override
     public Board create(Board board) {
-        return null;
+        Long id = boaedIdx.incrementAndGet();
+        boardMap.put(id,board);
+        return board;
     }
 
     @Override
