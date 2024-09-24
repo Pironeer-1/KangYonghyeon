@@ -8,12 +8,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Member {
-    private int id;
+    private Long id;
     private String name;
     private String password;
 
     @Builder
-    public Member(int id, String name, String password) {
+    public Member(Long id, String name, String password) {
         this.id = id;
         this.name = name;
         this.password = password;
