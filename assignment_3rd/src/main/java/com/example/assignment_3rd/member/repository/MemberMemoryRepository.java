@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
@@ -19,9 +20,10 @@ public class MemberMemoryRepository implements MemberRepository {
         memberMap.put(id,member);
         return member;
     }
-
     @Override
-    public Member findByName(String name) {
-        return null;
+    public Optional<Member> findByName(String name){
+        return memberMap.values().stream().filter(m->m.getName().equals(name)).findAny();
     }
+
+
 }
