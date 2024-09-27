@@ -7,6 +7,8 @@ import com.example.assignment_3rd.board.entity.Board;
 import com.example.assignment_3rd.board.repository.BoardRepository;
 import com.example.assignment_3rd.global.dto.result.ListResult;
 import com.example.assignment_3rd.global.dto.result.SingleResult;
+import com.example.assignment_3rd.global.exception.CustomException;
+import com.example.assignment_3rd.global.exception.ErrorCode;
 import com.example.assignment_3rd.global.service.ResponseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +46,7 @@ public class BoardService {
 
     //단건 조회
     public SingleResult<BoardRes> findById(Long boardId) {
-        Board board=boardRepository.findById(boardId).orElseThrow(()->new RuntimeException("Board not found"));
+        Board board=boardRepository.findById(boardId).orElseThrow(()->new CustomException(ErrorCode.BOARD_NOT_FOUND));
         BoardRes boardRes=BoardRes.of(board);
         return ResponseService.getSingeResult(boardRes);
     }
@@ -56,7 +58,7 @@ public class BoardService {
     }
     //업데이트
     public SingleResult<Long> update(BoardUpdateReq req) {
-        Board board=boardRepository.findById(req.id()).orElseThrow(()->new RuntimeException("Board not found"));
+        Board board=boardRepository.findById(req.id()).orElseThrow(()->new CustomException(ErrorCode.BOARD_NOT_FOUND));
         boardRepository.create(board.update(req));
         return ResponseService.getSingeResult(board.getId());
     }

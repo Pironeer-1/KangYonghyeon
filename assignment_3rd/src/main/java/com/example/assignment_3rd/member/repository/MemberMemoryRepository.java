@@ -24,6 +24,11 @@ public class MemberMemoryRepository implements MemberRepository {
     public Optional<Member> findByName(String name){
         return memberMap.values().stream().filter(m->m.getName().equals(name)).findAny();
     }
+    @Override
+    public Boolean existsByName(String name) {
+        return memberMap.values().stream()
+                .anyMatch(data->data.getName().equals(name));
+    }
 
 
 }
