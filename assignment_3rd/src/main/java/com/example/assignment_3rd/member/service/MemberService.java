@@ -30,7 +30,8 @@ public class MemberService {
 
     //로그인
     public SingleResult<Long> login(MemberLoginReq req)  {
-        Member loginMember=memberRepository.findByName(req.name()).orElseThrow(()->new CustomException(ErrorCode.USER_NOT_EXIST));
+        Member loginMember=memberRepository.findByName(req.name())
+                .orElseThrow(()->new CustomException(ErrorCode.USER_NOT_EXIST));
         //비밀번호 검증
         if (!loginMember.getPassword().equals(req.password())) {
             throw new CustomException(ErrorCode.USER_WRONG_PASSWORD);

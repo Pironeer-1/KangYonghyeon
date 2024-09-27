@@ -21,9 +21,9 @@
 
 ### Member
 
-**`join` → jwtTokenSet**
+**`join` → member 객체**
 
-**`login`→ jwtTokenSet**
+**`login`→ member_id**
 
 ### 최종 성공 응답
 
